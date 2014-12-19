@@ -1,0 +1,162 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>BuyTicket.sikuli\aaa.sikuli</h2> <a href="BuyTicket.sikuli\aaa.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> shutil
+<span class="kw">import</span> os.path
+
+<span class="kw">def</span> getSklPath():
+    <span class="kw">return</span> getBundlePath()[:-<span class="dig">8</span>]+<span class="str">'/'</span>
+
+main_reg = Region(<span class="dig">0</span>,<span class="dig">87</span>,<span class="dig">683</span>,<span class="dig">566</span>)
+sec_reg = Region(<span class="dig">0</span>,<span class="dig">0</span>,<span class="dig">609</span>,<span class="dig">507</span>)
+third_reg = Region(<span class="dig">0</span>,<span class="dig">0</span>,<span class="dig">684</span>,<span class="dig">619</span>)
+<span class="kw">def</span> capturingValid(pic_name):
+    pos = sec_reg.<span class="skw">find</span>(<img src="1418978414747.png" />)
+    pic = <span class="skw">capture</span>(pos.above(<span class="dig">77</span>).nearby(-<span class="dig">10</span>))
+    skl_pic = getSklPath()+pic_name
+    os.remove(skl_pic)
+    shutil.move (pic, skl_pic)
+<span class="kw">def</span> getValidKey(pic_name):
+    <span class="kw">return</span> -<span class="dig">1</span>
+
+<span class="kw">def</span> buy_series_train(list):
+    Settings.MoveMouseDelay = <span class="dig">0.1</span>
+    <span class="kw">for</span> train <span class="kw">in</span> list:
+        main_reg.exists(<img src="1418974460310.png" />, <span class="dig">0.5</span>)
+        reg2 = main_reg.<span class="skw">find</span>(<img src="1418974460310.png" />).right(<span class="dig">175</span>)
+        reg2.<span class="skw">doubleClick</span>()
+        <span class="skw">type</span>(Key.DELETE)
+        <span class="skw">type</span>(train+Key.TAB)
+        <span class="skw">wait</span>(<span class="dig">0.1</span>)
+        buy_two_ticket = Pattern(<img src="twoTicket-2.png" />).similar(<span class="dig">0.45</span>).targetOffset(<span class="dig">0</span>,-<span class="dig">30</span>)
+        <span class="kw">if</span> <span class="kw">not</span> reg2.below(<span class="dig">100</span>).exists(<img src="1418975901700.png" />, <span class="dig">0</span>) :
+            <span class="kw">if</span> reg2.right(<span class="dig">300</span>).exists(<img src="1418927064591.png" />, <span class="dig">0</span>):
+                reg2.below(<span class="dig">100</span>).<span class="skw">click</span>(Pattern(<img src="1418926828169.png" />).targetOffset(<span class="dig">26</span>,<span class="dig">2</span>))
+                reg2.below(<span class="dig">300</span>).exists(buy_two_ticket, <span class="dig">0.5</span>)
+                reg2.below(<span class="dig">300</span>).<span class="skw">click</span>(buy_two_ticket)
+            <span class="kw">elif</span> reg2.right(<span class="dig">300</span>).exists(<img src="1418931581935.png" />, <span class="dig">0</span>):
+                reg2.below(<span class="dig">100</span>).<span class="skw">click</span>(Pattern(<img src="1418926828169.png" />).targetOffset(<span class="dig">26</span>,<span class="dig">2</span>))
+                reg2.below(<span class="dig">300</span>).exists(buy_two_ticket, <span class="dig">0.5</span>)
+                reg2.below(<span class="dig">300</span>).<span class="skw">click</span>(buy_two_ticket)
+            <span class="kw">else</span>:
+                reg2.below(<span class="dig">100</span>).<span class="skw">click</span>(Pattern(<img src="1418976550075.png" />).similar(<span class="dig">0.48</span>))
+                reg2.below(<span class="dig">300</span>).exists(buy_two_ticket, <span class="dig">0.5</span>)
+                reg2.below(<span class="dig">300</span>).<span class="skw">click</span>(buy_two_ticket)
+        reg2.below(<span class="dig">300</span>).<span class="skw">click</span>(<img src="1418926780388.png" />)
+
+        sec_reg.exists(<img src="1418927190669.png" />,<span class="dig">0.5</span>)
+        <span class="skw">sleep</span>(<span class="dig">0.05</span>)
+        pic = sec_reg.<span class="skw">find</span>(<img src="1418927190669.png" />)
+        key = <span class="skw">input</span>( <span class="str">u"The 驗證"</span> )
+        sec_reg.paste(Pattern(<img src="1418927840669.png" />).targetOffset(-<span class="dig">49</span>,-<span class="dig">13</span>), key)
+        sec_reg.<span class="skw">click</span>(<img src="1418927859294.png" />)
+        <span class="skw">wait</span>(<span class="dig">0.2</span>)
+        <span class="kw">if</span> third_reg.exists(<img src="1418981173919.png" />, <span class="dig">0.5</span>) <span class="kw">or</span> third_reg.exists(<img src="1418977601653.png" />, <span class="dig">0.0</span>) \
+                <span class="kw">or</span> third_reg.exists(<img src="1418952066872.png" />, <span class="dig">0</span>):
+            <span class="skw">type</span>(Key.BACKSPACE)
+            <span class="skw">wait</span>(<span class="dig">0.2</span>)
+            third_reg.<span class="skw">click</span>(<img src="1418931108544.png" />)
+        <span class="kw">else</span> :
+            <span class="kw">break</span>
+    Settings.MoveMouseDelay = <span class="dig">0.5</span>
+
+
+<span class="kw">def</span> open_website(url, person_id):
+    main_reg = Region(<span class="dig">0</span>,<span class="dig">1</span>,<span class="dig">628</span>,<span class="dig">406</span>)
+    main_reg.<span class="skw">find</span>(<img src="1418937615372.png" />).right(<span class="dig">200</span>).<span class="skw">click</span>()
+    <span class="skw">type</span>(<span class="str">"a"</span>, Key.CTRL)
+    paste(url)
+    <span class="skw">type</span>(Key.ENTER)
+    main_reg.exists(<img src="1418938141435.png" />)
+    main_reg.<span class="skw">click</span>(<img src="1418938141435.png" />)
+    paste(person_id)
+
+list_tai_hua = [<span class="str">"5232"</span>, <span class="str">"402"</span>, <span class="str">"404"</span>, <span class="str">"5204"</span> ,<span class="str">"5672"</span>, <span class="str">"5682"</span>, <span class="str">"5234"</span>, <span class="str">"74"</span>, <span class="str">"206"</span>, <span class="str">"272"</span>, <span class="str">"5408"</span>, <span class="str">"5236"</span>, <span class="str">"410"</span>, <span class="str">"208"</span>]
+list_tai_yi_hua = [<span class="str">"404"</span>, <span class="str">"5204"</span> ,<span class="str">"5672"</span>, <span class="str">"5682"</span>, <span class="str">"206"</span>, <span class="str">"272"</span>, <span class="str">"208"</span>]
+
+
+open_website(<span class="str">"http://railway.hinet.net/ctno1.htm?from_station=073&amp;to_station=051&amp;getin_date=2015/01/01"</span>, <span class="str">"A128378388"</span>)
+buy_series_train(list_tai_yi_hua[:<span class="dig">5</span>])
+
+<span class="cmt">#open_website("http://railway.hinet.net/ctno1.htm?from_station=100&amp;to_station=051&amp;getin_date=2015/01/01", "A128378388")
+</span><span class="cmt">#buy_series_train(list_tai_hua)
+</span>
+
+
+<span class="cmt">#open_website("http://railway.hinet.net/ctno1.htm?from_station=073&amp;to_station=051&amp;getin_date=2015/01/01", "A128378388")
+</span><span class="cmt">#buy_series_train(list_tai_hua)
+</span>
+<span class="cmt">#open_website("http://railway.hinet.net/ctno1.htm?from_station=100&amp;to_station=073&amp;getin_date=2015/01/01", "A128378388")
+</span><span class="cmt">#buy_series_train(list_tai_yi_hua)</span>
+</pre>
+</body>
+</html>
